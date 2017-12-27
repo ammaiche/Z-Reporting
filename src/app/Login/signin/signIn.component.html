@@ -1,12 +1,21 @@
- <div class="form-group">
-  <label class="control-label" for="username">Username</label>
-    <input class="form-control" id="username">
-  </div>
 
-  <div class="form-group">
-  <label class="control-label">Password</label>
-    <input class="form-control" id="password">
-  </div>
+  <form [formGroup]="myForm" >
+   <div class="form-group">
+    <label class="control-label" for="email">Email</label>
+      <input type="email" class="form-control" [formControl]="myForm.controls.email" id="email" >
+      <span *ngIf="!myForm.controls.email.valid &&  myForm.controls.email.touched">
+        L'email n'est pas valide
+      </span>
+    </div>
 
- <button class="btn btn-success">S'authentifier</button>
- <p>Pas encore inscris? <a routerLink="/signup">Créer un compte</a></p>
+    <div class="form-group">
+    <label class="control-label">Password</label>
+      <input class="form-control" id="password" [formControl]="myForm.controls.password">
+      <span *ngIf="!myForm.controls.password.valid &&  myForm.controls.password.touched">
+        Le mot de passe n'est pas valide
+      </span>
+    </div>
+
+   <button class="btn btn-success" [disabled]="!myForm.valid">S'authentifier</button>
+   <p>Pas encore inscris? <a routerLink="/signup">Créer un compte</a></p>
+  </form>

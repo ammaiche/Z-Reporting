@@ -14,6 +14,12 @@ export class LoginService{
 
   }
 
+  logout() : void{
+
+    if(this.loggedIn){
+      this.loggedIn  = false;
+    }
+  }
   login(user: User): Observable<User>{
 
     const fetchedUser =  this.userService.getUser(user.email);
@@ -22,6 +28,7 @@ export class LoginService{
 
       if((fetchedUser as User).password === user.password) {
 
+        this.loggedIn = true;
         return Observable.create((observer: Observer<User>) =>{
 
           observer.next(fetchedUser);
