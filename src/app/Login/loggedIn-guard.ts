@@ -16,7 +16,12 @@ export class LoggedInGuard implements CanActivate{
               state: RouterStateSnapshot
               ): Observable<boolean> | Promise<boolean> | boolean {
 
-    return !this.cookieService.get('loggedIn');
+    if(!this.cookieService.get('loggedIn')){
+      return true;
+    }
+    else {
+      this.router.navigateByUrl('/home');
+    }
   }
 
 }
