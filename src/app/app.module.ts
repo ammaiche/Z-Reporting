@@ -7,6 +7,7 @@ import {AppRoutingModule} from './app.routing.module';
 import {LoginService} from './Login/login.service';
 import {LoggedOutGuard} from './Login/loggedOut-guard';
 import {UserService} from './User/user.service' ;
+import {CookieService} from 'angular2-cookie/core';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {UserService} from './User/user.service' ;
     AppRoutingModule,
     LoginModule
   ],
-  providers: [LoginService, UserService, LoggedOutGuard],
+  providers: [LoginService, UserService, LoggedOutGuard, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

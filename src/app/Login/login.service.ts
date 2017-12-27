@@ -4,22 +4,19 @@ import {UserService} from '../User/user.service' ;
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import {Observer} from 'rxjs/Observer';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class LoginService{
 
-  loggedIn = false;
   currentUser: User = null;
 
-  constructor(private userService: UserService){
+  constructor(private userService: UserService, private cookieService: CookieService){
 
   }
 
   logout() : void{
-
-    if(this.loggedIn){
-      this.loggedIn  = false;
-    }
+    this.cookieService.remove('loggedIn');
   }
   login(user: User): Observable<User>{
 
@@ -30,7 +27,9 @@ export class LoginService{
 
       if((fetchedUser as User).password === user.password) {
 
-        this.loggedIn = true;
+        //Create cookie
+        this.cookieService.put('loggedIn', 'true');
+
         return Observable.create((observer: Observer<User>) =>{
 
           observer.next(fetchedUser);

@@ -1,18 +1,24 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {LoginService} from './login.service';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class LoggedOutGuard implements CanActivate{
-  constructor(private loginService: LoginService, private router : Router){
+  constructor(private router : Router,
+              private cookieService: CookieService){
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | Observable<boolean> | Promise<boolean> {
 
-    if(!this.loginService.loggedIn) this.router.navigateByUrl('/signin');
-    else return true;
+    if(!this.cookieService.get('loggedIn')) {
+
+      this.router.navigateByUrl('/signin');
+
+    }else{
+      return true;
+    }
 
   }
 
