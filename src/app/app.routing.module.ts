@@ -9,7 +9,8 @@ const routes: Routes = [
 
   {path : 'home', component : HomeComponent, canActivate : [LoggedOutGuard]},
   {path : 'signin', component : SignInComponent, canActivate : [LoggedInGuard]},
-  {path : '', redirectTo : 'home', pathMatch : 'full'}
+  {path : '', redirectTo : 'home', pathMatch : 'full'},
+  {path : '**', redirectTo: 'home'}
 ];
 
 @NgModule({
