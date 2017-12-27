@@ -9,6 +9,7 @@ import {Observer} from 'rxjs/Observer';
 export class LoginService{
 
   loggedIn = false;
+  currentUser: User = null;
 
   constructor(private userService: UserService){
 
@@ -23,6 +24,7 @@ export class LoginService{
   login(user: User): Observable<User>{
 
     const fetchedUser =  this.userService.getUser(user.email);
+
 
     if(fetchedUser){
 
