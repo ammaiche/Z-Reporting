@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   private selectedMonthTab : number[][];
   private selectedMonth : {firstDay : number, monthNumber: number, monthLabel : string, monthDaysNumber :number, year: number};
   private currentDayIndex =0;
+  private monthLabel : string;
+  private year: number;
 
   constructor(private loginService : LoginService, private router : Router) { }
 
@@ -40,11 +42,9 @@ export class HomeComponent implements OnInit {
       monthDaysNumber: data.monthDaysNumber,
       year: data.year
     };
-
-    console.log(this.selectedMonth);
   }
-  lockMonth(){
 
+  lockMonth(){
 
     for(let i =0; i<6; i++){
 
@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit {
       }
     }
 
+    this.monthLabel = this.selectedMonth.monthLabel;
+    this.year = this.selectedMonth.year;
     this.monthLocked = true;
   }
 

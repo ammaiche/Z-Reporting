@@ -16,15 +16,21 @@
       <p *ngIf="!monthLocked; else showMonth">Veuillez selectionner un mois</p>
 
       <ng-template #showMonth>
-        <table>
+
+        <h3>{{monthLabel}}--{{year}}</h3>
+          <table>
 
           <thead>
             <th>Lundi</th> <th>Mardi</th> <th>Mercredi</th> <th>Jeudi</th> <th>Vendredi</th><th>Samedi</th><th>Dimanche</th>
           </thead>
           <tbody>
 
-          <tr *ngFor="let week of selectedMonthTab">
-            <td *ngFor="let day of week">{{day}}</td>
+          <tr *ngFor='let week of selectedMonthTab'>
+            <td *ngFor='let day of week'>
+
+              <span *ngIf='day!=-1'>{{day}}</span>
+              <span *ngIf='day==-1' class="empty_cell">__</span>
+            </td>
           </tr>
 
           </tbody>

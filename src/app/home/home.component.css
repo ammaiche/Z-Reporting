@@ -4,3 +4,6 @@ th{
 td{
   text-align: center;
 }
+.empty_cell{
+  background: grey;
+}
