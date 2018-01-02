@@ -1,6 +1,6 @@
 import {ICalendar} from './ICalendar';
 import {FrenchCalendar} from './frenchCalendar';
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector : 'app-calendar',
@@ -10,23 +10,26 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 export class CalendarComponent implements OnInit{
 
 
-  calendar: ICalendar ;
-  tabCalendar: number[][] = []; //Calendar that will be displayed
+  private calendar: ICalendar ;
+  private tabCalendar: number[][] = []; //Calendar that will be displayed
 
-  selectedMonthLabel : string;
-  selectedDayLabel : string;
-  selectedMonth : number;
-  selectedDay : number;
-  selectedYear : number;
+  private selectedMonthLabel : string;
+  private selectedDayLabel : string;
+  private selectedMonth : number;
+  private selectedDay : number;
+  private selectedYear : number;
+  private selectedBox : {x: number, y: number}= {x: -1, y: -1};
 
-  selectedBox : {x: number, y: number}= {x: -1, y: -1};
   private currentMonthDayIndex =0;
   private nextMonthDayIndex = 0;
   private previousMonthDayIndex :number;
 
-  constructor(){
+  //Events
 
-    //shortcuts;
+  @Output('onDateChange')
+    dateChange = new EventEmitter();
+
+  constructor(){
   }
 
   ngOnInit(): void {
@@ -41,7 +44,6 @@ export class CalendarComponent implements OnInit{
     for(let i=0; i<6 ; i++){
       this.tabCalendar.push([]);
     }
-
     this.fillTabCalendar(this.calendar.currentMonth-1);
   }
 
@@ -86,31 +88,61 @@ export class CalendarComponent implements OnInit{
     this.fillTabCalendar(this.selectedMonth-1);
   }
 
-  selectBox(x: number, y: number){
+  private selectBox(x: number, y: number){
 
     this.selectedBox.x = x;
     this.selectedBox.y = y;
+    this.selectedDay = this.tabCalendar[x][y];
+
+    //Because we have also some of the days of previous and next month we check if the month changes
+    if((this.selectedDay>20) &&(this.selectedBox.x<2)){
+
+      this.selectedMonth = this.calendar.currentMonth-1;
+      if(this.selectedMonth==0) this.selectedMonth=12;
+
+    }else if((this.selectedDay<20)&&(this.selectedBox.x>=4)){
+
+      this.selectedMonth = (this.calendar.currentMonth % 12)+1
+
+    }else{
+
+        this.selectedMonth = this.calendar.currentMonth;
+    }
+
+    this.dateChange.emit({year : this.selectedYear,
+                                monthNumber : this.selectedMonth,
+                                monthLabel : this.selectedMonthLabel,
+                                monthDaysNumber : this.calendar.maxDaysPerMonth[this.selectedMonth-1]}
+                        );
   }
-  checkBox(x: number, y: number): boolean{
+  private checkBox(x: number, y: number): boolean{
       return (x==this.selectedBox.x && y==this.selectedBox.y);
   }
-  onNextMonth(){
+  private nextMonth(){
     this.selectedMonth = (this.selectedMonth % 12) + 1 ;
     this.reinitialize();
+
+    this.dateChange.emit(new Date(this.selectedYear, this.selectedMonth-1, this.selectedDay));
   }
-  onPreviousMonth(){
+  private previousMonth(){
 
     if(--this.selectedMonth==0) this.selectedMonth=12;
     this.reinitialize();
+
+    this.dateChange.emit(new Date(this.selectedYear, this.selectedMonth-1, this.selectedDay));
   }
 
-  onNextYear(){
+  private nextYear(){
     this.selectedYear++;
     this.reinitialize();
+
+    this.dateChange.emit(new Date(this.selectedYear, this.selectedMonth-1, this.selectedDay));
   }
-  onPreviousYear(){
+  private previousYear(){
     this.selectedYear--;
     this.reinitialize();
+
+    this.dateChange.emit(new Date(this.selectedYear, this.selectedMonth-1, this.selectedDay));
   }
 
 }

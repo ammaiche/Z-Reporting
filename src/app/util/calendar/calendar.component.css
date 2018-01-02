@@ -7,3 +7,9 @@ td.selected{
 td.normal{
   background: none;
 }
+td{
+  text-align: center;
+}
+th{
+  padding: 0.4em;
+}
