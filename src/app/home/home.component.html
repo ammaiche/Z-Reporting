@@ -6,14 +6,31 @@
 
   <div class="row">
     <div class="col-md-4">
-      <app-calendar (onDateChange)=""></app-calendar>
+      <app-calendar (onDateChange)="calendarDateChange($event)"></app-calendar>
 
-      <button style="margin-top: 1em;">Verrouiller</button>
+      <button style="margin-top: 1em;" (click)="lockMonth()">Verrouiller</button>
     </div>
 
   <div class="col-md-8">
   </div>
-      <p *ngIf="">Veuillez selectionner un mois</p>
+      <p *ngIf="!monthLocked; else showMonth">Veuillez selectionner un mois</p>
+
+      <ng-template #showMonth>
+        <table>
+
+          <thead>
+            <th>Lundi</th> <th>Mardi</th> <th>Mercredi</th> <th>Jeudi</th> <th>Vendredi</th><th>Samedi</th><th>Dimanche</th>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let week of selectedMonthTab">
+            <td *ngFor="let day of week">{{day}}</td>
+          </tr>
+
+          </tbody>
+
+        </table>
+      </ng-template>
   </div>
 
 

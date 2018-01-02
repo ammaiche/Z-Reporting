@@ -9,18 +9,74 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-   date : Date;
+  private monthLocked : boolean;
+  private selectedMonthTab : number[][];
+  private selectedMonth : {firstDay : number, monthNumber: number, monthLabel : string, monthDaysNumber :number, year: number};
+  private currentDayIndex =0;
 
   constructor(private loginService : LoginService, private router : Router) { }
 
   ngOnInit() {
 
-    this.date = new Date();
+    this.selectedMonthTab = [];
 
+      for(let i=0; i<6; i++){
+          this.selectedMonthTab.push([]);
+      }
   }
-
   logout(){
+
       this.loginService.logout();
       this.router.navigateByUrl('/signin');
   }
+  calendarDateChange(data){
+
+    this.currentDayIndex=0;
+
+    this.selectedMonth = {
+      firstDay : data.firstDay,
+      monthNumber: data.monthNumber,
+      monthLabel: data.monthLabel,
+      monthDaysNumber: data.monthDaysNumber,
+      year: data.year
+    };
+
+    console.log(this.selectedMonth);
+  }
+  lockMonth(){
+
+
+    for(let i =0; i<6; i++){
+
+      for(let j =0; j<7; j++){
+
+        if(i==0){
+
+          if(j<this.selectedMonth.firstDay-1) {
+
+            this.selectedMonthTab[i][j] =-1;
+          }
+          else{
+
+            this.selectedMonthTab[i][j] = ++this.currentDayIndex;
+          }
+
+        }else{
+
+          if(++this.currentDayIndex <= this.selectedMonth.monthDaysNumber){
+
+            this.selectedMonthTab[i][j] = this.currentDayIndex;
+
+          }else{
+
+            this.selectedMonthTab[i][j] =-1;
+          }
+
+        }
+      }
+    }
+
+    this.monthLocked = true;
+  }
+
 }

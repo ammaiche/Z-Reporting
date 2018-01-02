@@ -7,8 +7,8 @@ export class FrenchCalendar implements ICalendar{
   maxDaysPerMonth: number[];
   holidays: { monthOrder: number; days: number[] }[];
 
+  firstDay : number;
   currentDay: number;
-  currentMonthDay : number;
   currentMonth: number;
   currentYear: number;
   daysCount: number;
@@ -41,17 +41,23 @@ export class FrenchCalendar implements ICalendar{
     ];
 
     this.daysCount = 7;
-    this.currentDay = this.currentDate.getDay()==0 ? 7 : this.currentDate.getDay(); //Days start from 1 not 0
-     this.currentMonthDay= this.currentDate.getDate();
+    this.currentDay= this.currentDate.getDate();
     this.currentMonth = this.currentDate.getMonth()+1; //Months from 0 to 11
     this.currentYear = this.currentDate.getFullYear();
-  }
+
+    this.currentDate.setDate(1); //We need to know the starting date
+    this.firstDay = this.currentDate.getDay()==0 ? 7 : this.currentDate.getDay();
+   }
   reset(date: Date): void {
 
-    this.currentDay = date.getDay()==0 ? 7 : date.getDay();
-    this.currentMonthDay= date.getDate();
+    this.currentDay= date.getDate();
     this.currentMonth = date.getMonth()+1; //Months from 0 to 11
     this.currentYear = date.getFullYear();
+
+    date.setDate(1);
+    this.firstDay = date.getDay()==0 ? 7 : date.getDay();
+
+
     //Leap year??
 
     if((this.currentYear%4==0 && this.currentYear%100!=0) || (this.currentYear%400==0)) {  //Leap year

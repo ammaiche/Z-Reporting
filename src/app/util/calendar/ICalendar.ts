@@ -14,9 +14,9 @@ export interface ICalendar{
     days: number[]
   }[];
 
-  currentDay: number;
+  firstDay: number;
+  currentDay : number;
   currentMonth: number;
-  currentMonthDay : number;
   currentYear: number;
   daysCount: number;
   reset(date : Date) :void;
