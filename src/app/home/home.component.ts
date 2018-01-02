@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../Login/login.service';
 import {Router} from '@angular/router';
+import {Point} from '../util/point/point';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +16,14 @@ export class HomeComponent implements OnInit {
   private currentDayIndex =0;
   private monthLabel : string;
   private year: number;
+  private daysWorked: {day :number, half : boolean}[];
 
   constructor(private loginService : LoginService, private router : Router) { }
 
   ngOnInit() {
 
     this.selectedMonthTab = [];
+    this.daysWorked = [];
 
       for(let i=0; i<6; i++){
           this.selectedMonthTab.push([]);
@@ -33,8 +36,6 @@ export class HomeComponent implements OnInit {
   }
   calendarDateChange(data){
 
-    this.currentDayIndex=0;
-
     this.selectedMonth = {
       firstDay : data.firstDay,
       monthNumber: data.monthNumber,
@@ -45,6 +46,9 @@ export class HomeComponent implements OnInit {
   }
 
   lockMonth(){
+
+    this.currentDayIndex=0;
+    this.daysWorked = [];
 
     for(let i =0; i<6; i++){
 
@@ -79,6 +83,43 @@ export class HomeComponent implements OnInit {
     this.monthLabel = this.selectedMonth.monthLabel;
     this.year = this.selectedMonth.year;
     this.monthLocked = true;
+  }
+
+  isSelected(x : number, y : number){
+
+    return this.daysWorked[new Point(x, y).hashCode()] != null;
+  }
+
+  isHalf(x : number, y : number){
+
+    if(this.daysWorked[new Point(x, y).hashCode()]!=null){
+
+      return this.daysWorked[new Point(x, y).hashCode()].half;
+
+    }else{
+
+        return false;
+    }
+   }
+  addDay(x : number, y : number){
+
+    const  p : Point = new Point(x,y);
+
+    if(this.isSelected(x, y)){ //Logical delete
+
+      if(!this.daysWorked[p.hashCode()].half){
+
+        this.daysWorked[p.hashCode()].half = true;
+
+      }else{
+
+        this.daysWorked[p.hashCode()] = null;
+      }
+
+    }else{
+
+      this.daysWorked[p.hashCode()] = {day : this.selectedMonthTab[x][y], half : false};
+    }
   }
 
 }

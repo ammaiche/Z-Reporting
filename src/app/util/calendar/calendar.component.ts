@@ -1,6 +1,7 @@
-import {ICalendar} from './ICalendar';
+import {ICalendar} from './iCalendar';
 import {FrenchCalendar} from './frenchCalendar';
 import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
+import {Point} from '../point/point';
 
 @Component({
   selector : 'app-calendar',
@@ -17,7 +18,8 @@ export class CalendarComponent implements OnInit{
   private selectedMonth : number;
   private selectedDay : number;
   private selectedYear : number;
-  private selectedBox : {x: number, y: number}= {x: -1, y: -1};
+
+  private selectedBox : Point;
 
   private currentMonthDayIndex =0;
   private nextMonthDayIndex = 0;
@@ -103,8 +105,7 @@ export class CalendarComponent implements OnInit{
 
   private selectBox(x: number, y: number){
 
-    this.selectedBox.x = x;
-    this.selectedBox.y = y;
+    this.selectedBox = new Point(x,y);
     this.selectedDay = this.tabCalendar[x][y];
 
     //Because we have also some of the days of previous and next month we check if the month changes
@@ -140,7 +141,7 @@ export class CalendarComponent implements OnInit{
     */
   }
   private checkBox(x: number, y: number): boolean{
-      return (x==this.selectedBox.x && y==this.selectedBox.y);
+      return (x === this.selectedBox.x && y === this.selectedBox.y);
   }
   private nextMonth(){
 

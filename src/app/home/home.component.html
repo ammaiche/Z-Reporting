@@ -25,11 +25,15 @@
           </thead>
           <tbody>
 
-          <tr *ngFor='let week of selectedMonthTab'>
-            <td *ngFor='let day of week'>
+          <tr *ngFor='let week of selectedMonthTab; let x=index;'>
 
-              <span *ngIf='day!=-1'>{{day}}</span>
+            <td *ngFor='let day of week; let y=index;' >
+
+              <span *ngIf='day!=-1' (click)="addDay(x,y)" [class]="isSelected(x,y)?'selected':'normal'" [class]="isHalf(x,y)? 'half': 'full'" >
+                {{day}}
+              </span>
               <span *ngIf='day==-1' class="empty_cell">__</span>
+
             </td>
           </tr>
 

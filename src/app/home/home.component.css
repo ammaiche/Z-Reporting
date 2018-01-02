@@ -4,6 +4,25 @@ th{
 td{
   text-align: center;
 }
+td:hover{
+  cursor: pointer;
+}
 .empty_cell{
   background: grey;
+}
+td span{
+  display: inline-block;
+  width: 100%;
+  height: 2em;
+}
+td span.normal{
+  background: none;
+}
+td span.selected{
+  background: greenyellow;
+}
+td span.half{
+  display: inline-block;
+  height: 1em;
+  background: greenyellow;
 }

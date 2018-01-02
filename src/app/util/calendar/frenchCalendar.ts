@@ -1,4 +1,4 @@
-import {ICalendar} from './ICalendar';
+import {ICalendar} from './iCalendar';
 
 export class FrenchCalendar implements ICalendar{
 
