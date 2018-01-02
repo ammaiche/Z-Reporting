@@ -10,8 +10,8 @@
 <h3>{{selectedMonthLabel}}--{{selectedYear}}</h3>
 <table>
   <th *ngFor="let day of calendar.dayLabels">{{day}}</th>
-  <tr *ngFor="let daysRow of tabCalendar">
-    <td *ngFor="let day of daysRow">
+  <tr *ngFor="let daysRow of tabCalendar; let x=index;" >
+    <td *ngFor="let day of daysRow; let y=index;" (click)="selectBox(x,y)" [ngClass]='checkBox(x,y)?"selected":"normal"'>
       {{day}}
     </td>
   </tr>

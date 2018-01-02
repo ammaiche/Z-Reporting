@@ -1,0 +1,9 @@
+td:hover{
+  cursor: pointer;
+}
+td.selected{
+  background : greenyellow;
+}
+td.normal{
+  background: none;
+}

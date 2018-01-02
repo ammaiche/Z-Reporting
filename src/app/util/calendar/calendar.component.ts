@@ -1,10 +1,11 @@
 import {ICalendar} from './ICalendar';
 import {FrenchCalendar} from './frenchCalendar';
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 
 @Component({
   selector : 'app-calendar',
-  templateUrl : './calendar.component.html'
+  templateUrl : './calendar.component.html',
+  styleUrls : ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit{
 
@@ -18,6 +19,7 @@ export class CalendarComponent implements OnInit{
   selectedDay : number;
   selectedYear : number;
 
+  selectedBox : {x: number, y: number}= {x: -1, y: -1};
   private currentMonthDayIndex =0;
   private nextMonthDayIndex = 0;
   private previousMonthDayIndex :number;
@@ -84,6 +86,14 @@ export class CalendarComponent implements OnInit{
     this.fillTabCalendar(this.selectedMonth-1);
   }
 
+  selectBox(x: number, y: number){
+
+    this.selectedBox.x = x;
+    this.selectedBox.y = y;
+  }
+  checkBox(x: number, y: number): boolean{
+      return (x==this.selectedBox.x && y==this.selectedBox.y);
+  }
   onNextMonth(){
     this.selectedMonth = (this.selectedMonth % 12) + 1 ;
     this.reinitialize();
