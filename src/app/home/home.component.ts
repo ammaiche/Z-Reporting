@@ -122,4 +122,22 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  selectAll() :void {
+
+    this.daysWorked = [];
+
+    for (let i = 0; i < 6; i++) {
+
+      for (let j = 0; j < 7; j++) {
+
+        this.daysWorked[new Point(i,j).hashCode()] = {day : this.selectedMonthTab[i][j], half : false};
+      }
+    }
+  }
+
+  deselectAll(){
+
+    this.daysWorked = [];
+  }
+
 }
