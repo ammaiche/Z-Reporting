@@ -1,0 +1,18 @@
+<div>
+  <button (click)="onPreviousYear()">Previous Year</button>
+  <button (click)="onNextYear()">Next Year</button>
+</div>
+<div>
+  <button (click)="onPreviousMonth()">Previous Month</button>
+  <button (click)="onNextMonth()">Next Month</button>
+</div>
+
+<h3>{{selectedMonthLabel}}--{{selectedYear}}</h3>
+<table>
+  <th *ngFor="let day of calendar.dayLabels">{{day}}</th>
+  <tr *ngFor="let daysRow of tabCalendar">
+    <td *ngFor="let day of daysRow">
+      {{day}}
+    </td>
+  </tr>
+</table>

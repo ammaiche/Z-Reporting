@@ -9,9 +9,14 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+   date : Date;
+
   constructor(private loginService : LoginService, private router : Router) { }
 
   ngOnInit() {
+
+    this.date = new Date();
+
   }
 
   logout(){

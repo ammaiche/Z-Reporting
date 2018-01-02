@@ -8,11 +8,13 @@ import {LoginService} from './Login/login.service';
 import {LoggedOutGuard} from './Login/loggedOut-guard';
 import {UserService} from './User/user.service' ;
 import {CookieService} from 'angular2-cookie/core';
+import {CalendarComponent} from './util/calendar/calendar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
