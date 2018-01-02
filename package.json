@@ -24,7 +24,7 @@
     "angular2-cookie": "^1.2.6",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "pdfkit": "^0.8.3",
+    "ng-pdf-make": "0.0.2",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },

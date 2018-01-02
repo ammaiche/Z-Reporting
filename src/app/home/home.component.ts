@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../Login/login.service';
 import {Router} from '@angular/router';
 import {Point} from '../util/point/point';
+import {PdfmakeService} from 'ng-pdf-make';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers : [PdfmakeService]
 })
 export class HomeComponent implements OnInit {
 
@@ -18,15 +21,23 @@ export class HomeComponent implements OnInit {
   private year: number;
   private daysWorked: {day :number, half : boolean}[];
 
-  constructor(private loginService : LoginService, private router : Router) { }
+  private totalWeekWork : number[];
+
+
+  constructor(private loginService : LoginService,
+              private router : Router,
+              private pdfService : PdfmakeService) {}
 
   ngOnInit() {
 
     this.selectedMonthTab = [];
     this.daysWorked = [];
+    this.totalWeekWork =[];
 
-      for(let i=0; i<6; i++){
+      for(let i=0 ; i<7 ; i++){
+
           this.selectedMonthTab.push([]);
+          this.totalWeekWork.push(0);
       }
   }
   logout(){
@@ -80,6 +91,11 @@ export class HomeComponent implements OnInit {
       }
     }
 
+    for(let j =0; j<7; j++){
+
+      this.selectedMonthTab[6][j] =0;
+    }
+
     this.monthLabel = this.selectedMonth.monthLabel;
     this.year = this.selectedMonth.year;
     this.monthLocked = true;
@@ -110,15 +126,24 @@ export class HomeComponent implements OnInit {
       if(!this.daysWorked[p.hashCode()].half){
 
         this.daysWorked[p.hashCode()].half = true;
+        this.totalWeekWork[x] -= 0.5;
+        this.totalWeekWork[6] -= 0.5; //total per week
+        this.selectedMonthTab[6][y] -= 0.5; //total per day
 
       }else{
 
+        this.totalWeekWork[x] -= 0.5;
+        this.totalWeekWork[6] -= 0.5;
+        this.selectedMonthTab[6][y] -= 0.5;
         this.daysWorked[p.hashCode()] = null;
       }
 
     }else{
 
       this.daysWorked[p.hashCode()] = {day : this.selectedMonthTab[x][y], half : false};
+      this.totalWeekWork[x]++;
+      this.totalWeekWork[6]++;
+      this.selectedMonthTab[6][y]++;
     }
   }
 
@@ -131,8 +156,10 @@ export class HomeComponent implements OnInit {
       for (let j = 0; j < 7; j++) {
 
         this.daysWorked[new Point(i,j).hashCode()] = {day : this.selectedMonthTab[i][j], half : false};
+        this.totalWeekWork[j] = 7;
       }
     }
+
   }
 
   deselectAll(){

@@ -3,6 +3,8 @@ th{
 }
 td{
   text-align: center;
+  height:2em;
+  width: 2em;
 }
 td:hover{
   cursor: pointer;
@@ -12,8 +14,8 @@ td:hover{
 }
 td span{
   display: inline-block;
-  width: 100%;
-  height: 2em;
+  height: 100%;
+  width :100%;
 }
 td span.normal{
   background: none;
@@ -23,6 +25,6 @@ td span.selected{
 }
 td span.half{
   display: inline-block;
-  height: 1em;
+  height: 50%;
   background: greenyellow;
 }

@@ -18,10 +18,25 @@
       <ng-template #showMonth>
 
         <h3>{{monthLabel}}--{{year}}</h3>
-          <table>
 
+        <div class="col-md-2">
+          <table>
+            <thead>
+              <th>Nombre de jours travaillés</th>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let totalWeek of totalWeekWork">
+                <td>{{totalWeek}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+        <table>
           <thead>
-            <th>Lundi</th> <th>Mardi</th> <th>Mercredi</th> <th>Jeudi</th> <th>Vendredi</th><th>Samedi</th><th>Dimanche</th>
+         <th>Lundi</th> <th>Mardi</th> <th>Mercredi</th> <th>Jeudi</th> <th>Vendredi</th><th>Samedi</th><th>Dimanche</th>
           </thead>
           <tbody>
 
@@ -38,8 +53,9 @@
           </tr>
 
           </tbody>
-
           </table>
+      </div>
+
             <div>
                 <button (click)="selectAll()">Selectionner tout</button>
                 <button (click)="deselectAll()">Annuler</button>
