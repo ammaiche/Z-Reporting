@@ -1,13 +1,15 @@
 <div>
-  <button (click)="previousYear()">Previous Year</button>
-  <button (click)="nextYear()">Next Year</button>
-</div>
-<div>
-  <button (click)="previousMonth()">Previous Month</button>
-  <button (click)="nextMonth()">Next Month</button>
+  <span class="date-control" (click)="previousYear()"><</span>
+  <span class="date-label">{{selectedYear}}</span>
+  <span class="date-control" (click)="nextYear()">></span>
 </div>
 
-<h3>{{selectedMonthLabel}}--{{selectedYear}}</h3>
+<div style="margin-top: 1em;">
+  <span class="date-control" (click)="previousMonth()"><</span>
+  <span class="date-label">{{selectedMonthLabel}}</span>
+  <span class="date-control" (click)="nextMonth()">> </span>
+</div>
+
 <table>
   <th *ngFor="let dayLabel of calendar.dayLabels">{{dayLabel}}</th>
   <tr *ngFor="let week of tabCalendar; let x=index;" >

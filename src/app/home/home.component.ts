@@ -22,11 +22,14 @@ export class HomeComponent implements OnInit {
   private daysWorked: {day :number, half : boolean}[];
 
   private totalWeekWork : number[];
-
+  private currentUser : User;
 
   constructor(private loginService : LoginService,
               private router : Router,
-              private pdfService : PdfmakeService) {}
+              private pdfService : PdfmakeService) {
+
+    this.currentUser = loginService.currentUser;
+  }
 
   ngOnInit() {
 

@@ -30,6 +30,7 @@ export class LoginService{
         //Create cookie
         this.cookieService.put('loggedIn', 'true');
 
+
         return Observable.create((observer: Observer<User>) =>{
 
           observer.next(fetchedUser);
