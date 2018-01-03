@@ -116,7 +116,8 @@ export class HomeComponent implements OnInit {
 
         return false;
     }
-   }
+  }
+
   addDay(x : number, y : number){
 
     const  p : Point = new Point(x,y);
@@ -140,10 +141,13 @@ export class HomeComponent implements OnInit {
 
     }else{
 
-      this.daysWorked[p.hashCode()] = {day : this.selectedMonthTab[x][y], half : false};
-      this.totalWeekWork[x]++;
-      this.totalWeekWork[6]++;
-      this.selectedMonthTab[6][y]++;
+      if(this.selectedMonthTab[x][y]!=-1){
+
+        this.daysWorked[p.hashCode()] = {day : this.selectedMonthTab[x][y], half : false};
+        this.totalWeekWork[x]++;
+        this.totalWeekWork[6]++;
+        this.selectedMonthTab[6][y]++;
+      }
     }
   }
 
@@ -155,16 +159,33 @@ export class HomeComponent implements OnInit {
 
       for (let j = 0; j < 7; j++) {
 
-        this.daysWorked[new Point(i,j).hashCode()] = {day : this.selectedMonthTab[i][j], half : false};
-        this.totalWeekWork[j] = 7;
+        if(this.selectedMonthTab[i][j] != -1){
+
+          if(j!=6) { //Le dimanche
+
+            this.daysWorked[new Point(i, j).hashCode()] = {day: this.selectedMonthTab[i][j], half: false};
+            this.totalWeekWork[i]++;
+            this.selectedMonthTab[6][j]++;
+          }
+        }
       }
     }
 
+    for(let i=0; i< 6; i++){
+
+      this.totalWeekWork[6]+=this.totalWeekWork[i];
+    }
   }
 
   deselectAll(){
 
     this.daysWorked = [];
+    for(let i=0; i< 7; i++){
+
+      this.totalWeekWork[i] = 0;
+      this.selectedMonthTab[6][i] = 0;
+    }
+
   }
 
 }
