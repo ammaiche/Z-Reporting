@@ -14,8 +14,13 @@ export class LoginService{
   }
 
   logout() : void{
+
     this.cookieService.remove('loggedIn');
+    this.cookieService.remove('firstName');
+    this.cookieService.remove('lastName');
+    this.cookieService.remove('currentProject');
   }
+
   login(user: User): Observable<boolean |null>{
 
     const fetchedUser =  this.userService.getUser(user.email);

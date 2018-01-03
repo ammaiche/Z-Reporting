@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Point} from '../util/point/point';
-import {PdfmakeService} from 'ng-pdf-make';
 import {CookieService} from 'angular2-cookie/core';
-
+import {LoginService} from '../Login/login.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers : [PdfmakeService]
+  styleUrls: ['./home.component.css']
+
 })
 export class HomeComponent implements OnInit {
+
 
   private monthLocked : boolean;
   private selectedMonthTab : number[][];
@@ -24,9 +24,11 @@ export class HomeComponent implements OnInit {
   private totalWeekWork : number[];
   private currentUser : User;
 
-  constructor(private cookieService : CookieService,
-              private router : Router,
-              private pdfService : PdfmakeService) {
+  constructor(
+              private loginService : LoginService,
+              private cookieService : CookieService,
+              private router : Router
+              ) {
 
     this.currentUser = {
 
@@ -200,4 +202,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  exportToPDF(){
+
+   /* const url = 'http://api.html2pdfrocket.com/pdf';
+    const apiKey = '408b37fb-ac73-42ba-a5e0-af947f57e287';
+    const body = new URLSearchParams();
+    body.set('apikey', apiKey);
+    body.set('value', 'Bonjour');
+
+
+    this.httpClient.post(url, body ).subscribe((response)=>{
+
+    });
+*/
+
+  }
 }

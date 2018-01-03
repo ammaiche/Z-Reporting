@@ -9,6 +9,7 @@ import {LoggedOutGuard} from './Login/loggedOut-guard';
 import {UserService} from './User/user.service' ;
 import {CookieService} from 'angular2-cookie/core';
 import {CalendarComponent} from './util/calendar/calendar.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import {CalendarComponent} from './util/calendar/calendar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule
   ],
-  providers: [LoginService, UserService, LoggedOutGuard, CookieService],
+  providers: [LoginService, UserService, LoggedOutGuard, CookieService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
