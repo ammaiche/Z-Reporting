@@ -9,8 +9,6 @@ import {CookieService} from 'angular2-cookie/core';
 @Injectable()
 export class LoginService{
 
-  currentUser: User = null;
-
   constructor(private userService: UserService, private cookieService: CookieService){
 
   }
@@ -18,7 +16,7 @@ export class LoginService{
   logout() : void{
     this.cookieService.remove('loggedIn');
   }
-  login(user: User): Observable<User>{
+  login(user: User): Observable<boolean |null>{
 
     const fetchedUser =  this.userService.getUser(user.email);
 
@@ -29,11 +27,13 @@ export class LoginService{
 
         //Create cookie
         this.cookieService.put('loggedIn', 'true');
+        this.cookieService.put('firstName', fetchedUser.firstName);
+        this.cookieService.put('lastName', fetchedUser.lastName);
+        this.cookieService.put('currentProject', fetchedUser.currentProject);
 
+        return Observable.create((observer: Observer<boolean>) =>{
 
-        return Observable.create((observer: Observer<User>) =>{
-
-          observer.next(fetchedUser);
+          observer.next(true);
           observer.complete();
         });
       }

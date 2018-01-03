@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../Login/login.service';
 import {Router} from '@angular/router';
 import {Point} from '../util/point/point';
 import {PdfmakeService} from 'ng-pdf-make';
+import {CookieService} from 'angular2-cookie/core';
 
 
 @Component({
@@ -24,11 +24,19 @@ export class HomeComponent implements OnInit {
   private totalWeekWork : number[];
   private currentUser : User;
 
-  constructor(private loginService : LoginService,
+  constructor(private cookieService : CookieService,
               private router : Router,
               private pdfService : PdfmakeService) {
 
-    this.currentUser = loginService.currentUser;
+    this.currentUser = {
+
+      firstName : this.cookieService.get('firstName'),
+      lastName : this.cookieService.get('lastName'),
+      currentProject : this.cookieService.get('currentProject'),
+      email : '',
+      password : ''
+    };
+
   }
 
   ngOnInit() {
@@ -43,11 +51,13 @@ export class HomeComponent implements OnInit {
           this.totalWeekWork.push(0);
       }
   }
+
   logout(){
 
       this.loginService.logout();
       this.router.navigateByUrl('/signin');
   }
+
   calendarDateChange(data){
 
     this.selectedMonth = {
@@ -188,7 +198,6 @@ export class HomeComponent implements OnInit {
       this.totalWeekWork[i] = 0;
       this.selectedMonthTab[6][i] = 0;
     }
-
   }
 
 }

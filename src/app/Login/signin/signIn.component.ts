@@ -33,10 +33,9 @@ export class SignInComponent implements OnInit{
       password : this.myForm.get('password').value
     };
 
-    this.loginService.login(user).subscribe((value : User)=>{
+    this.loginService.login(user).subscribe((value)=>{
 
       if(value){
-          this.loginService.currentUser = value;
           this.router.navigateByUrl('/home');
       }else{
         this.userNotExist = true;

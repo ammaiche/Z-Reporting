@@ -1,14 +1,19 @@
 <div class="container-fluid">
+
   <div class="row">
-  <h1>Home</h1>
-<button (click)="logout()" class="btn btn-danger">Déconnexion</button>
+  <h2>Bonjour {{currentUser.firstName}}</h2>
+  <h3>Projet : {{currentUser.currentProject}}</h3>
+  </div>
+
+  <div class="row">
+    <button (click)="logout()" class="btn btn-danger" style="position: absolute; right: 10em;">Déconnexion</button>
   </div>
 
   <div class="row" style="margin-top: 5em;">
     <div class="col-md-4">
       <app-calendar (onDateChange)="calendarDateChange($event)"></app-calendar>
 
-      <button style="margin-top: 1em;" (click)="lockMonth()">Verrouiller</button>
+      <button style="margin-top: 1em;" (click)="lockMonth()" class="btn btn-primary">Verrouiller</button>
     </div>
 
   <div class="col-md-8">
@@ -17,7 +22,7 @@
 
       <ng-template #showMonth>
 
-        <h3>{{monthLabel}}--{{year}}</h3>
+        <h3 style="text-align: center;">{{monthLabel}}--{{year}}</h3>
 
         <div class="col-md-2">
           <table>
@@ -54,13 +59,14 @@
 
           </tbody>
           </table>
+          <div>
+            <button class="btn btn-success" (click)="selectAll()">Selectionner tout</button>
+            <button class="btn btn-danger" (click)="deselectAll()">Annuler</button>
+            <button class="btn btn-warning">Exporter vers PDF</button>
+          </div>
       </div>
 
-            <div>
-                <button (click)="selectAll()">Selectionner tout</button>
-                <button (click)="deselectAll()">Annuler</button>
 
-            </div>
       </ng-template>
   </div>
 
