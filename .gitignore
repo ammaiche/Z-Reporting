@@ -1,18 +1,18 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+/webapp/dist
+/webapp/tmp
+/webapp/out-tsc
 
 # dependencies
-/node_modules
+/webapp/node_modules
 
-/backEnd/.mvn
-/backEnd/data
-/backEnd/mvnw
-/backEnd/mvnw.cmd
-/backEnd/Z-Reporting.iml
+.mvn
+back_end/data
+mvnw
+mvnw.cmd
+Z-Reporting.iml
 
 
 
@@ -42,8 +42,8 @@ testem.log
 /typings
 
 # e2e
-/e2e/*.js
-/e2e/*.map
+/webapp/e2e/*.js
+/webapp/e2e/*.map
 
 # System Files
 .DS_Store
