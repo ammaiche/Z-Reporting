@@ -8,6 +8,12 @@
 # dependencies
 /node_modules
 
+/backEnd/.mvn
+/backEnd/data
+/backEnd/mvnw
+/backEnd/mvnw.cmd
+
+
 # IDEs and editors
 /.idea
 .project
