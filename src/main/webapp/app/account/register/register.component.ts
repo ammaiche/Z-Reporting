@@ -10,11 +10,13 @@ import { LoginModalService, EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } f
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
 
+
     confirmPassword: string;
     doNotMatch: string;
     error: string;
     errorEmailExists: string;
     errorUserExists: string;
+    currentProject:string;
     registerAccount: any;
     success: boolean;
     modalRef: NgbModalRef;
