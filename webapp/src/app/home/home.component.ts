@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Point} from '../util/point/point';
 import {CookieService} from 'angular2-cookie/core';
 import {LoginService} from '../Login/login.service';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
   constructor(
               private loginService : LoginService,
               private cookieService : CookieService,
-              private router : Router
+              private router : Router,
+              private httpClient : HttpClient
               ) {
 
     this.currentUser = {
@@ -202,6 +204,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  testBackEnd(){
+
+    let formData : FormData = new FormData();
+    formData.append('username','ammaiche@gmail.com' );
+    formData.append('password', 'Akwa222222');
+
+    this.httpClient.post("/api/authentication", formData).subscribe();
+
+  }
   exportToPDF(){
 
    /* const url = 'http://api.html2pdfrocket.com/pdf';

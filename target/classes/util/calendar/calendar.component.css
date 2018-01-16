@@ -1,0 +1,22 @@
+td:hover{
+  cursor: pointer;
+}
+td.selected{
+  background : greenyellow;
+}
+td.normal{
+  background: none;
+}
+td{
+  text-align: center;
+}
+th{
+  padding: 0.4em;
+}
+.date-label{
+  font-size: 16pt;
+}
+.date-control{
+  cursor: pointer;
+  margin: 1em;
+}

@@ -1,0 +1,30 @@
+th{
+  padding: 0.5em;
+}
+td{
+  text-align: center;
+  height:2em;
+  width: 2em;
+}
+td:hover{
+  cursor: pointer;
+}
+.empty_cell{
+  background: grey;
+}
+td span{
+  display: inline-block;
+  height: 100%;
+  width :100%;
+}
+td span.normal{
+  background: none;
+}
+td span.selected{
+  background: greenyellow;
+}
+td span.half{
+  display: inline-block;
+  height: 50%;
+  background: greenyellow;
+}
