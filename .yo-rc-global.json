@@ -1,0 +1,7 @@
+{
+  "generator-jhipster:4.13.3": {
+    "promptValues": {
+      "packageName": "com.zsoft.zreporting"
+    }
+  }
+}
