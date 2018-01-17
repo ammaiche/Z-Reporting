@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ZreportingSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
+import {CalendarComponent} from '../calendarUtils/calendar/calendar.component';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     ],
     declarations: [
         HomeComponent,
+        CalendarComponent
     ],
     entryComponents: [
     ],

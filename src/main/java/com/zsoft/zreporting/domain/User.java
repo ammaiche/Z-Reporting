@@ -56,10 +56,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     /*
     @OneToMany
     private List<Project> projectList;
+*/
+
     @OneToOne
     @JoinColumn(name="CURRENT_PROJECT_ID")
     private Project currentProject;
-*/
 
     @NotNull
     @Column(nullable = false)
@@ -107,6 +108,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
+*/
 
     public Project getCurrentProject() {
         return currentProject;
@@ -115,7 +117,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setCurrentProject(Project currentProject) {
         this.currentProject = currentProject;
     }
-*/
+
     public Long getId() {
         return id;
     }
