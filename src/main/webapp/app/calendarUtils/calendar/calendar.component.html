@@ -1,0 +1,20 @@
+<div>
+  <span class="date-control" (click)="previousYear()"><</span>
+  <span class="date-label">{{selectedYear}}</span>
+  <span class="date-control" (click)="nextYear()">></span>
+</div>
+
+<div style="margin-top: 1em;">
+  <span class="date-control" (click)="previousMonth()"><</span>
+  <span class="date-label">{{selectedMonthLabel}}</span>
+  <span class="date-control" (click)="nextMonth()">> </span>
+</div>
+
+<table>
+  <th *ngFor="let dayLabel of calendar.dayLabels">{{dayLabel}}</th>
+  <tr *ngFor="let week of tabCalendar; let x=index;" >
+    <td *ngFor="let day of week; let y=index;" (click)="selectBox(x,y)" [class]='checkBox(x,y)?"selected":"normal"'>
+      {{day}}
+    </td>
+  </tr>
+</table>

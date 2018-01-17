@@ -14,15 +14,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.time.Instant;
 
-/**
- * A user.
- */
 @Entity
 @Table(name = "jhi_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -36,7 +30,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 100)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
 
@@ -58,6 +52,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 5, max = 100)
     @Column(length = 100, unique = true)
     private String email;
+
+    /*
+    @OneToMany
+    private List<Project> projectList;
+    @OneToOne
+    @JoinColumn(name="CURRENT_PROJECT_ID")
+    private Project currentProject;
+*/
 
     @NotNull
     @Column(nullable = false)
@@ -99,6 +101,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
+  /*  public List<Project> getProjectList() {
+        return projectList;
+    }
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public Project getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Project currentProject) {
+        this.currentProject = currentProject;
+    }
+*/
     public Long getId() {
         return id;
     }

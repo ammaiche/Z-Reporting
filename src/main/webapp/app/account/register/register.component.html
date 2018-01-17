@@ -111,18 +111,18 @@
                         </small>
                     </div>
                 </div>
-
-
+                <!--
                 <div class="form-group">
                     <label class="form-control-label" for="currentProject">Current Project</label>
                     <input type="password" class="form-control" id="currentProject" name="currentProject" #currentProjectInput="ngModel" placeholder="Specify the current project you are working on"
-                           [(ngModel)]="currentProject" minlength=4 maxlength=50 required>
+                           [(ngModel)]="registerAccount.currentProject.name" minlength=4 maxlength=50 required>
                     <div *ngIf="currentProjectInput.dirty && currentProjectInput.invalid">
                         <small class="form-text text-danger" *ngIf="currentProjectInput.errors.required">
                             Your need to specify a project
                         </small>
                     </div>
                 </div>
+                -->
                 <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Register</button>
             </form>
             <p></p>

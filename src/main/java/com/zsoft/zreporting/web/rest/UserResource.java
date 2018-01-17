@@ -175,9 +175,9 @@ public class UserResource {
 
     /**
      * DELETE /users/:login : delete the "login" User.
-     *
      * @param login the login of the user to delete
      * @return the ResponseEntity with status 200 (OK)
+     *
      */
     @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     @Timed

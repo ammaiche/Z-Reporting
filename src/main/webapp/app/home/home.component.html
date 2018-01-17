@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-md-3">
         <span class="hipster img-fluid rounded"></span>
+        <div *ngIf="isAuthenticated()">
+
+        </div>
     </div>
+
     <div class="col-md-9">
         <h1 class="display-4">Welcome to Z-Reporting!</h1>
 
@@ -10,6 +14,8 @@
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span *ngIf="account"
                    > You are logged in as user "{{account.login}}". </span>
+
+
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">

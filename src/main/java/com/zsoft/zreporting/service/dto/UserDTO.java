@@ -3,6 +3,7 @@ package com.zsoft.zreporting.service.dto;
 import com.zsoft.zreporting.config.Constants;
 
 import com.zsoft.zreporting.domain.Authority;
+import com.zsoft.zreporting.domain.Project;
 import com.zsoft.zreporting.domain.User;
 
 import org.hibernate.validator.constraints.Email;
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,6 +55,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+//    private List<Project> projectList;
+
+  //  private Project currentProject;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -63,6 +69,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+       // this.projectList = user.getProjectList().stream().collect(Collectors.toList());
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -74,6 +81,15 @@ public class UserDTO {
             .map(Authority::getName)
             .collect(Collectors.toSet());
     }
+
+  /* public List<Project> getProjectList() {
+        return projectList;
+    }
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+   */
 
     public Long getId() {
         return id;
@@ -179,6 +195,14 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+/*  public Project getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Project currentProject) {
+        this.currentProject = currentProject;
+    }
+*/
     @Override
     public String toString() {
         return "UserDTO{" +
