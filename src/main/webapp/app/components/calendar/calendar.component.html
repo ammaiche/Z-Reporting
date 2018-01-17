@@ -1,0 +1,36 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-2 header-controls" (click)="previous()">
+            <i class="fa fa-angle-left"></i>
+        </div>
+        <div class="col-8 month-year">
+            <span>{{ month.locale(_langKey).format('MMMM, YYYY') }}</span>
+        </div>
+        <div class="col-2 header-controls" (click)="next()">
+            <i class="fa fa-angle-right"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="day-cell d-inline-block" *ngFor="let index of [ 1, 2 ,3 ,4 ,5 ,6 ,7 ]">
+            {{ today.clone().day(index).locale(_langKey).format('ddd') }}
+        </div>
+    </div>
+
+    <div class="row" *ngFor="let daysWeek of ( days | chunk )">
+        <div class="day day-cell d-inline-block"
+             *ngFor="let day of daysWeek"
+             (mousedown)="mouseDown(day)"
+             (mouseup)="mouseUp($event, day)"
+             (mousemove)="hover($event, day)"
+             [class.today]="today.isSame(day.date, 'day')"
+             [class.different-month]="!day.weekend && !month.isSame(day.date, 'month')"
+             [class.weekend]="day.weekend"
+             [class.holiday]="day.holiday"
+             [class.selected]="day.selectionType === 0"
+             [class.hover]="day.hover"
+             [class.halfDay]="day.selectionType === 1">
+            {{ day.date.date() }}
+        </div>
+    </div>
+</div>
+

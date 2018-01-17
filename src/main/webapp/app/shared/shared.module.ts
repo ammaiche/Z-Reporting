@@ -16,10 +16,18 @@ import {
     HasAnyAuthorityDirective,
 } from './';
 
+
+import {
+    CalendarModule,
+    CalendarComponent
+} from '../components';
+
+
 @NgModule({
     imports: [
         ZreportingSharedLibsModule,
-        ZreportingSharedCommonModule
+        ZreportingSharedCommonModule,
+        CalendarModule
     ],
     declarations: [
         JhiLoginModalComponent,
@@ -41,7 +49,8 @@ import {
         ZreportingSharedCommonModule,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        CalendarComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

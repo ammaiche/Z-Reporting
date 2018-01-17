@@ -1,0 +1,54 @@
+.month-year {
+    font-size: 0.8em;
+    font-weight: bold;
+    background: #E5E5E5;
+
+}
+.header-controls {
+    cursor: pointer;
+    background: #E5E5E5;
+}
+
+.day-cell {
+    font-size: 0.7em;
+    width: 14.28%;
+    &.day {
+        font-size: 1em;
+        width: 14.28%;
+        cursor: pointer;
+        &.today {
+            border: 1px solid rgba(134, 136, 136, 0.75);
+            font-weight: bold;
+        }
+        &.different-month {
+            color: #777777;
+            background: #EEEEEE;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        &.weekend {
+            background: #adadad;
+            cursor: not-allowed;
+        }
+        &.holiday {
+            background: #e2e0c2;
+            cursor: not-allowed;
+        }
+        &.selected {
+            background: #d29f9f;
+            font-weight: bold;
+        }
+        &.hover {
+            background: #debfc5;
+        }
+        &.halfDay {
+            background-image: -webkit-linear-gradient(45deg, #d29f9f 50%, #c4e2bf 50%);
+            font-weight: bold;
+        }
+    }
+}
+
+.container {
+    border: solid 1px #CCC;
+    -webkit-user-select: none;
+}

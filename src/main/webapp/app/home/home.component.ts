@@ -45,4 +45,9 @@ export class HomeComponent implements OnInit {
     login() {
         this.modalRef = this.loginModalService.open();
     }
+
+    selected(event: any) {
+        console.log(JSON.stringify(event));
+    }
+
 }
