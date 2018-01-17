@@ -88,11 +88,13 @@
             <column name="user_agent" type="varchar(255)"/>
         </createTable>
 
+
         <addForeignKeyConstraint baseColumnNames="authority_name"
                                  baseTableName="jhi_user_authority"
                                  constraintName="fk_authority_name"
                                  referencedColumnNames="name"
                                  referencedTableName="jhi_authority"/>
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="jhi_user_authority"
                                  constraintName="fk_user_id"

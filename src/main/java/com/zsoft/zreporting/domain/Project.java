@@ -1,14 +1,12 @@
 package com.zsoft.zreporting.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "project")
 public class Project implements Serializable{
 
 

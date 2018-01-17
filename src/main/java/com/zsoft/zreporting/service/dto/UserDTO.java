@@ -55,9 +55,9 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-//    private List<Project> projectList;
+    private List<Project> projectList;
 
-  //  private Project currentProject;
+    private Project currentProject;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -82,14 +82,20 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
-  /* public List<Project> getProjectList() {
+    public List<Project> getProjectList() {
         return projectList;
     }
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
 
-   */
+    public Project getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(Project currentProject) {
+        this.currentProject = currentProject;
+    }
 
     public Long getId() {
         return id;
@@ -195,14 +201,6 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-/*  public Project getCurrentProject() {
-        return currentProject;
-    }
-
-    public void setCurrentProject(Project currentProject) {
-        this.currentProject = currentProject;
-    }
-*/
     @Override
     public String toString() {
         return "UserDTO{" +
