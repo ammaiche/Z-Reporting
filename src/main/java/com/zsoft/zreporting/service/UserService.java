@@ -29,9 +29,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Service class for managing users.
- */
 @Service
 @Transactional
 public class UserService {
