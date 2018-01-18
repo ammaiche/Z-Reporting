@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="00000000000003" author="Mahdi">
+
+        <createTable tableName="report">
+
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="user_id" type="int"/>
+            <column name="month" type="int"/>
+            <column name="year"  type="int"/>
+
+        </createTable>
+
+        <createTable tableName="day">
+
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="user_report">
+
+            <column name="report_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

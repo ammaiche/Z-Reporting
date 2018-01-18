@@ -1,12 +1,12 @@
 package com.zsoft.zreporting.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
+@Entity
 public class Day implements Serializable{
 
-    private LocalDateTime date;
-    private boolean half;
-    private boolean weekend;
-    private boolean holiday;
+    @Id
+    private int date;
 }
