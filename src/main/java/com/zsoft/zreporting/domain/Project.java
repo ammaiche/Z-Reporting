@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -19,9 +21,17 @@ public class Project implements Serializable{
     @Id
     private String name;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-
+    @ManyToMany
+    @JoinTable(
+        name = "user_project",
+        joinColumns = {
+            @JoinColumn(name = "project_name")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "user_id")
+        }
+    )
+    private List<User> users =new ArrayList<>();
 
     public String getName() {
         return name;
@@ -31,14 +41,13 @@ public class Project implements Serializable{
         this.name = name;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
-
 
     @Override
     public boolean equals(Object o) {

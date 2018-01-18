@@ -44,6 +44,7 @@
 
         </createTable>
 
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="report"
                                  constraintName="fk_report_user_id"
@@ -61,6 +62,12 @@
                                  constraintName="fk_report_day_day"
                                  referencedColumnNames="day"
                                  referencedTableName="day"/>
+
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/days.csv"
+                  separator=";"
+                  tableName="day"/>
 
     </changeSet>
 </databaseChangeLog>

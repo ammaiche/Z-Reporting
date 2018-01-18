@@ -10,6 +10,7 @@ import com.zsoft.zreporting.repository.ProjectRepository;
 import com.zsoft.zreporting.repository.UserRepository;
 import com.zsoft.zreporting.security.SecurityUtils;
 import com.zsoft.zreporting.service.MailService;
+import com.zsoft.zreporting.service.ProjectService;
 import com.zsoft.zreporting.service.UserService;
 import com.zsoft.zreporting.service.dto.UserDTO;
 import com.zsoft.zreporting.web.rest.errors.*;
@@ -42,7 +43,8 @@ public class AccountResource {
 
     private final PersistentTokenRepository persistentTokenRepository;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, PersistentTokenRepository persistentTokenRepository) {
+    public AccountResource(UserRepository userRepository, UserService userService,
+                           MailService mailService, PersistentTokenRepository persistentTokenRepository) {
 
         this.userRepository = userRepository;
         this.userService = userService;
@@ -68,7 +70,6 @@ public class AccountResource {
 
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-
 
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);

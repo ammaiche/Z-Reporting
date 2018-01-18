@@ -2,6 +2,7 @@ package com.zsoft.zreporting.service;
 
 import com.zsoft.zreporting.config.CacheConfiguration;
 import com.zsoft.zreporting.domain.Authority;
+import com.zsoft.zreporting.domain.Project;
 import com.zsoft.zreporting.domain.User;
 import com.zsoft.zreporting.repository.AuthorityRepository;
 import com.zsoft.zreporting.repository.PersistentTokenRepository;
@@ -39,6 +40,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final ProjectService projectService;
+
     private final PasswordEncoder passwordEncoder;
 
     private final PersistentTokenRepository persistentTokenRepository;
@@ -47,8 +50,10 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, ProjectService projectService, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+
         this.userRepository = userRepository;
+        this.projectService = projectService;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
@@ -109,9 +114,6 @@ public class UserService {
         newUser.setLastName(userDTO.getLastName());
         newUser.setEmail(userDTO.getEmail());
 
-        newUser.setProjectList(new ArrayList<>());
-        newUser.getProjectList().add(userDTO.getCurrentProject());
-
         newUser.setCurrentProject(userDTO.getCurrentProject());
 
         newUser.setImageUrl(userDTO.getImageUrl());
@@ -123,6 +125,12 @@ public class UserService {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+
+        User fetchedUser = userRepository.findOneByLogin(newUser.getLogin()).get();
+        Project project = new Project(newUser.getCurrentProject().getName());
+        project.getUsers().add(fetchedUser);
+
+        projectService.registerProject(project);
 
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());

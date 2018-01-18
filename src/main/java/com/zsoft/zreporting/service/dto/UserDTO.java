@@ -56,8 +56,6 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-    private List<Project> projectList;
-
     private Project currentProject;
 
     public UserDTO() {
@@ -80,13 +78,6 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
-    }
-
-    public List<Project> getProjectList() {
-        return projectList;
-    }
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
     }
 
     public Project getCurrentProject() {

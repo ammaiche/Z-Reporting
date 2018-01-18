@@ -53,19 +53,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "user_project",
-        joinColumns = {
-            @JoinColumn(name = "user_id")
-        },
-        inverseJoinColumns = {
-            @JoinColumn(name = "project_name")
-        }
-    )
-    private List<Project> projectList = new ArrayList<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "current_project")
     private Project currentProject;
 
@@ -109,15 +97,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
-    public List<Project> getProjectList() {
-        return projectList;
-    }
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
-    }
 
-
-   public Project getCurrentProject() {
+    public Project getCurrentProject() {
         return currentProject;
     }
 
