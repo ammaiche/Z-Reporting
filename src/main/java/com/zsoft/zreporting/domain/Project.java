@@ -9,16 +9,19 @@ import java.time.LocalDateTime;
 @Table(name = "project")
 public class Project implements Serializable{
 
+    public Project(){}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Project(String name){
+        this.name = name;
+    }
 
     @NotNull
+    @Id
     private String name;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+
 
     public String getName() {
         return name;

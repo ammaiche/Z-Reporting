@@ -3,8 +3,10 @@ package com.zsoft.zreporting.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.zsoft.zreporting.domain.PersistentToken;
+import com.zsoft.zreporting.domain.Project;
 import com.zsoft.zreporting.repository.PersistentTokenRepository;
 import com.zsoft.zreporting.domain.User;
+import com.zsoft.zreporting.repository.ProjectRepository;
 import com.zsoft.zreporting.repository.UserRepository;
 import com.zsoft.zreporting.security.SecurityUtils;
 import com.zsoft.zreporting.service.MailService;
@@ -68,14 +70,9 @@ public class AccountResource {
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
 
 
-
-        /*
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);*/
-
-
+        mailService.sendActivationEmail(user);
     }
-
     /**
      * GET  /activate : activate the registered user.
      *

@@ -1,6 +1,6 @@
 package com.zsoft.zreporting.web.rest;
 
-import com.zsoft.zreporting.config.Constants;
+/*import com.zsoft.zreporting.config.Constants;
 import com.zsoft.zreporting.ZreportingApp;
 import com.zsoft.zreporting.domain.Authority;
 import com.zsoft.zreporting.domain.PersistentToken;
@@ -50,6 +50,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @see AccountResource
  */
+/*
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ZreportingApp.class)
 public class AccountResourceIntTest {
@@ -823,3 +824,4 @@ public class AccountResourceIntTest {
             .andExpect(status().isInternalServerError());
     }
 }
+*/

@@ -53,11 +53,20 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
-    @ManyToMany
-    private List<Project> projectList;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_project",
+        joinColumns = {
+            @JoinColumn(name = "user_id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "project_name")
+        }
+    )
+    private List<Project> projectList = new ArrayList<>();
 
-    @JoinColumn(name = "current_project", unique = true)
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "current_project")
     private Project currentProject;
 
     @NotNull

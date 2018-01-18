@@ -13,17 +13,13 @@
     <changeSet id="00000000000002" author="Mahdi">
 
        <addColumn tableName="jhi_user">
-           <column name="current_project" type="bigint"/>
+           <column name="current_project" type="varchar(100)"/>
        </addColumn>
 
         <createTable tableName="project">
 
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
             <column name="name" type="varchar(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
 
             <column name="start_date" type="date"/>
@@ -32,26 +28,27 @@
         </createTable>
 
         <createTable tableName="user_project">
+
             <column name="user_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
 
-            <column name="project_id" type="bigint">
-                <constraints nullable="false"/>
+            <column name="project_name" type="varchar(100)">
+                <constraints nullable="false"  primaryKey="true"/>
             </column>
+
         </createTable>
-
 
         <addForeignKeyConstraint baseColumnNames="current_project"
                                  baseTableName="jhi_user"
-                                 constraintName="fk_current_project_id"
-                                 referencedColumnNames="id"
+                                 constraintName="fk_current_project_name"
+                                 referencedColumnNames="name"
                                  referencedTableName="project"/>
 
-        <addForeignKeyConstraint baseColumnNames="project_id"
+        <addForeignKeyConstraint baseColumnNames="project_name"
                                  baseTableName="user_project"
-                                 constraintName="fk_project_id"
-                                 referencedColumnNames="id"
+                                 constraintName="fk_project_name"
+                                 referencedColumnNames="name"
                                  referencedTableName="project"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
