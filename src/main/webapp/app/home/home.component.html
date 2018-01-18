@@ -6,13 +6,11 @@
     <div class="col-md-9">
         <h1 class="display-4">Welcome to Z-Reporting!</h1>
 
-        <jhi-calendar (daySelected)="selected($event)" [holidays]="['2018-01-18']" [allDays]="['2018-01-19', '2018-01-23']"></jhi-calendar>
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span *ngIf="account">
                     You are logged in as user "{{account.login}}". </span>
-
 
             </div>
 
@@ -25,5 +23,10 @@
             <a class="alert-link" routerLink="register">Register a new account</a>
         </div>
     </div>
-</div>
+
+    <div id="main_panel">
+        <jhi-calendar (daySelected)="selected($event)" [holidays]="['2018-01-18']" [allDays]="['2018-01-19', '2018-01-23']"></jhi-calendar>
+    </div>
+
+    </div>
 </div>
