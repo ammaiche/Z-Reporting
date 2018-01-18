@@ -18,7 +18,7 @@
                 <constraints primaryKey="true"/>
             </column>
 
-            <column name="user_id" type="int"/>
+            <column name="user_id" type="bigint"/>
             <column name="month" type="int"/>
             <column name="year"  type="int"/>
 
@@ -26,24 +26,41 @@
 
         <createTable tableName="day">
 
-            <column name="id" type="int">
+            <column name="day" type="int">
                 <constraints primaryKey="true"/>
             </column>
 
         </createTable>
 
-        <createTable tableName="user_report">
+        <createTable tableName="report_day">
 
             <column name="report_id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
 
-            <column name="user_id" type="bigint">
+            <column name="day" type="int">
                 <constraints primaryKey="true"/>
             </column>
 
         </createTable>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="report"
+                                 constraintName="fk_report_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="report_id"
+                                 baseTableName="report_day"
+                                 constraintName="fk_report_day_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="report"/>
+
+        <addForeignKeyConstraint baseColumnNames="day"
+                                 baseTableName="report_day"
+                                 constraintName="fk_report_day_day"
+                                 referencedColumnNames="day"
+                                 referencedTableName="day"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -8,5 +8,5 @@ import java.io.Serializable;
 public class Day implements Serializable{
 
     @Id
-    private int date;
+    private int day;
 }

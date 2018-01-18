@@ -20,15 +20,13 @@ public class Report implements Serializable{
 
     @ManyToMany
     @JoinTable(
-        name = "user_report",
+        name = "report_day",
         joinColumns = {
             @JoinColumn(name = "report_id")
         },
         inverseJoinColumns = {
-            @JoinColumn(name = "user_id")
+            @JoinColumn(name = "day")
         }
     )
     private List<Day> workedDays;
-
-
 }
