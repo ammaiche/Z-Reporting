@@ -100,7 +100,12 @@ export class HomeComponent implements OnInit {
         const report : Report = new Report(this.selectedMonth, this.selectedYear);
 
         for(let key in this.selectedDays){
-            report.workedDays.push(this.selectedDays[key].date);
+
+            report.workedDays.push({
+                day : this.selectedDays[key].date,
+                half : this.selectedDays[key].half
+            });
+
         }
         console.log(report);
     }

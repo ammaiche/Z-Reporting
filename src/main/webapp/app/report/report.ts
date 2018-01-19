@@ -7,5 +7,8 @@ export class Report{
         this.month = month;
         this.year = year;
     }
-    workedDays : number[] = [];
+    workedDays :{
+        day : number,
+        half : boolean
+    }[] = [];
 }
