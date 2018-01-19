@@ -7,6 +7,14 @@ public class DayDTO implements Serializable{
     private int day;
     private boolean half;
 
+    public DayDTO(){}
+
+    public DayDTO(int day, boolean half){
+
+        this.day = day;
+        this.half = half;
+    }
+
     public int getDay() {
         return day;
     }

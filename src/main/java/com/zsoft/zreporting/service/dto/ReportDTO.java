@@ -10,7 +10,6 @@ public class ReportDTO implements Serializable{
 
     private List<DayDTO> workedDays;
 
-
     public int getYear() {
         return year;
     }

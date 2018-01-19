@@ -20,4 +20,35 @@ public class ReportDay implements Serializable{
 
     private boolean half = false;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
+    }
+
+    public boolean isHalf() {
+        return half;
+    }
+
+    public void setHalf(boolean half) {
+        this.half = half;
+    }
 }
