@@ -10,11 +10,11 @@ public class ReportDay implements Serializable{
     @Id
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "report_id")
     private Report report;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "day")
     private Day day;
 
@@ -27,6 +27,7 @@ public class ReportDay implements Serializable{
     public void setId(long id) {
         this.id = id;
     }
+
 
     public Report getReport() {
         return report;
@@ -51,4 +52,5 @@ public class ReportDay implements Serializable{
     public void setHalf(boolean half) {
         this.half = half;
     }
+
 }

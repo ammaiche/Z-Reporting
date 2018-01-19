@@ -14,7 +14,7 @@
 
         <createTable tableName="report">
 
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true"/>
             </column>
 
@@ -34,7 +34,7 @@
 
         <createTable tableName="report_day">
 
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true"/>
             </column>
 

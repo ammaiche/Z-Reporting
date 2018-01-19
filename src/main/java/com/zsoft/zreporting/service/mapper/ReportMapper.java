@@ -44,7 +44,7 @@ public class ReportMapper {
                                             ReportDay reportDay = new ReportDay();
                                             reportDay.setDay(new Day(dayDTO.getDay()));
                                             reportDay.setHalf(dayDTO.isHalf());
-                                            reportDay.setReport(report);
+                                            //reportDay.setReport(report);
                                             return reportDay;
                                         })
                                         .collect(Collectors.toList());

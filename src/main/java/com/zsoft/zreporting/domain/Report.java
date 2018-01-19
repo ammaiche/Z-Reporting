@@ -19,7 +19,7 @@ public class Report implements Serializable{
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "report")
     private List<ReportDay> reportDays = new ArrayList<>();
 
     public Long getId() {
@@ -62,4 +62,25 @@ public class Report implements Serializable{
         this.reportDays = reportDays;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Report report = (Report) o;
+
+        if (month != report.month) return false;
+        if (year != report.year) return false;
+        if (!id.equals(report.id)) return false;
+        return user.equals(report.user);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = month;
+        result = 31 * result + year;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (reportDays != null ? reportDays.hashCode() : 0);
+        return result;
+    }
 }
