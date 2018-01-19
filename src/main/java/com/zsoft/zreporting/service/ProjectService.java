@@ -2,7 +2,6 @@ package com.zsoft.zreporting.service;
 
 import com.zsoft.zreporting.domain.Project;
 import com.zsoft.zreporting.repository.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

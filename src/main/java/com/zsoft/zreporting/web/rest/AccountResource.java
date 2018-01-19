@@ -3,14 +3,11 @@ package com.zsoft.zreporting.web.rest;
 import com.codahale.metrics.annotation.Timed;
 
 import com.zsoft.zreporting.domain.PersistentToken;
-import com.zsoft.zreporting.domain.Project;
 import com.zsoft.zreporting.repository.PersistentTokenRepository;
 import com.zsoft.zreporting.domain.User;
-import com.zsoft.zreporting.repository.ProjectRepository;
 import com.zsoft.zreporting.repository.UserRepository;
 import com.zsoft.zreporting.security.SecurityUtils;
 import com.zsoft.zreporting.service.MailService;
-import com.zsoft.zreporting.service.ProjectService;
 import com.zsoft.zreporting.service.UserService;
 import com.zsoft.zreporting.service.dto.UserDTO;
 import com.zsoft.zreporting.web.rest.errors.*;
