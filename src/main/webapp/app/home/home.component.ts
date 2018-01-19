@@ -3,6 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
+import { Report, ReportService } from '../report';
 
 @Component({
     selector: 'jhi-home',
@@ -13,20 +14,28 @@ import { Account, LoginModalService, Principal } from '../shared';
 
 })
 export class HomeComponent implements OnInit {
+
     account: Account;
     modalRef: NgbModalRef;
+    anySelected = false;
+
+    selectedYear  : number;
+    selectedMonth : number;
+    selectedDays  =[];
 
     constructor(
+
         private principal: Principal,
         private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager
-    ) {
-    }
+        private eventManager: JhiEventManager,
+        private reportService : ReportService){}
 
     ngOnInit() {
+
         this.principal.identity().then((account) => {
             this.account = account;
         });
+
         this.registerAuthenticationSuccess();
     }
 
@@ -46,8 +55,20 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.loginModalService.open();
     }
 
-    selected(event: any) {
-        console.log(JSON.stringify(event));
-    }
+    daySelected(event: any) {
 
+        if(!this.selectedDays[event.date]){
+
+            this.selectedDays[event.date] =new Date(event.date).getDate();
+
+        }else{
+            delete this.selectedDays[event.date];
+        }
+    }
+    generateReport(){
+
+        for(let key in this.selectedDays){
+            console.log(this.selectedDays[key]);
+        }
+    }
 }

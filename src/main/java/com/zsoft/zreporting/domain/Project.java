@@ -3,7 +3,6 @@ package com.zsoft.zreporting.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +20,8 @@ public class Project implements Serializable{
     @Id
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-        name = "user_project",
-        joinColumns = {
-            @JoinColumn(name = "project_name")
-        },
-        inverseJoinColumns = {
-            @JoinColumn(name = "user_id")
-        }
-    )
-    private List<User> users =new ArrayList<>();
+    @OneToMany(mappedBy = "project")
+    private List<UserProject> userProjects = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -41,12 +31,12 @@ public class Project implements Serializable{
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<UserProject> getUserProjects() {
+        return userProjects;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserProjects(List<UserProject> userProjects) {
+        this.userProjects = userProjects;
     }
 
     @Override

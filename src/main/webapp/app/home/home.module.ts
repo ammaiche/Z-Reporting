@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 import { ZreportingSharedModule } from '../shared';
 
 import { HOME_ROUTE, HomeComponent } from './';
+import { ReportService } from '../report';
+
+import { CalendarComponent } from '../components'
 
 @NgModule({
     imports: [
@@ -16,6 +19,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     entryComponents: [
     ],
     providers: [
+        ReportService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

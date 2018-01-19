@@ -4,14 +4,14 @@
     </div>
 
     <div class="col-md-9">
-        <h1 class="display-4">Welcome to Z-Reporting!</h1>
-
+        <h1 class="display-5" *ngIf="!isAuthenticated()">Welcome to Z-Reporting !</h1>
+        <h1 class="display-5" *ngIf="isAuthenticated()">
+              <span *ngIf="account">
+                    Hi "{{account.login}}" ! </span>
+        </h1>
 
         <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span *ngIf="account">
-                    You are logged in as user "{{account.login}}". </span>
-            </div>
+
 
         <div class="alert alert-warning" *ngSwitchCase="false">
             <span>If you want to </span>
@@ -23,14 +23,19 @@
         </div>
     </div>
 
-    <div id="select_days_panel">
+    <div id="select_days_panel" *ngIf="isAuthenticated()">
         <div id="select_days_header">
         <p>Please select the days you worked this month</p>
             <div class="text-success">Tip 1: A click means a day</div>
             <div class="text-success">Tip 2: A double click means half a day</div>
         </div>
 
-        <jhi-calendar (daySelected)="selected($event)" [holidays]="['2018-01-18']" [allDays]="['2018-01-19', '2018-01-23']"></jhi-calendar>
+        <jhi-calendar (daySelected)="daySelected($event)"></jhi-calendar>
+
+        <div id="select_days_footer">
+            <button class="btn btn-danger" (click)="generateReport()">Generate Ze Report</button>
+        </div>
+
     </div>
 
     </div>

@@ -123,12 +123,6 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
 
-        User fetchedUser = userRepository.findOneByLogin(newUser.getLogin()).get();
-        Project project = new Project(newUser.getCurrentProject().getName());
-        project.getUsers().add(fetchedUser);
-
-        projectService.registerProject(project);
-
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);

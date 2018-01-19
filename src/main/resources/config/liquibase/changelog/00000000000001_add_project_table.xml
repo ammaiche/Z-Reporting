@@ -22,39 +22,37 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
 
-            <column name="start_date" type="date"/>
-            <column name="end_date" type="date"/>
-
         </createTable>
 
         <createTable tableName="user_project">
 
-            <column name="user_id" type="bigint">
+            <column name="id" type="bigint">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
 
-            <column name="project_name" type="varchar(100)">
-                <constraints nullable="false"  primaryKey="true"/>
-            </column>
+            <column name="project_name" type="varchar(100)"/>
+            <column name="user_id" type="bigint"/>
+
             <column name="start_date" type="date"/>
             <column name="end_date"   type="date"/>
+
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="current_project"
                                  baseTableName="jhi_user"
-                                 constraintName="fk_current_project_name"
+                                 constraintName="fk_jhi_user_current_project"
                                  referencedColumnNames="name"
                                  referencedTableName="project"/>
 
         <addForeignKeyConstraint baseColumnNames="project_name"
                                  baseTableName="user_project"
-                                 constraintName="fk_project_name"
+                                 constraintName="fk_user_project_project_name"
                                  referencedColumnNames="name"
                                  referencedTableName="project"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_project"
-                                 constraintName="fk_user_project_id"
+                                 constraintName="fk_user_project_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
     </changeSet>

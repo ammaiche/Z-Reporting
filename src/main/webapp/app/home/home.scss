@@ -27,3 +27,10 @@ only screen and (                min-resolution: 2dppx) {
 #select_days_panel{
     margin-top: 5em;
 }
+#select_days_footer{
+    margin-top: 2em;
+    text-align: center;
+}
+#select_days_footer button{
+    cursor: pointer;
+}
