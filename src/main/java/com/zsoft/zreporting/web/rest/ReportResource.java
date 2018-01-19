@@ -13,6 +13,14 @@ public class ReportResource {
     @PostMapping("/report")
     public void registerReport(@RequestBody ReportDTO reportDTO){
 
+        System.out.println("Year "+reportDTO.getYear());
+        System.out.println("Month "+reportDTO.getMonth());
+
+        reportDTO.getWorkedDays().forEach((dayDTO ->{
+            System.out.println("{ day : "+dayDTO.getDay()+", half : "+dayDTO.isHalf()+"}");
+        } ));
+
+        System.out.println();
     }
 
 }

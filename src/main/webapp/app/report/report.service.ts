@@ -1,6 +1,6 @@
 import { Report } from "./report";
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { SERVER_API_URL } from "../app.constants";
 
 @Injectable()
@@ -18,8 +18,16 @@ export class ReportService{
             workedDays  : report.workedDays
         };
 
-        this.httpClient.post(SERVER_API_URL+"api/report",
-                                 JSON.stringify(jsonReport)).subscribe((value)=>{
+        const httpHeaders  = new HttpHeaders();
+        httpHeaders.set('Content Type', 'application/json; charset=utf-8');
+
+        console.log(JSON.stringify(jsonReport));
+
+        this.httpClient
+            .post(SERVER_API_URL+"api/report",
+                                 jsonReport, {headers: httpHeaders})
+            .subscribe((value)=>{
+
             console.log(value);
         });
     }

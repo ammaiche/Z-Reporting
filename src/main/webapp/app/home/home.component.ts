@@ -107,6 +107,6 @@ export class HomeComponent implements OnInit {
             });
 
         }
-        console.log(report);
+        this.reportService.saveReport(report);
     }
 }
