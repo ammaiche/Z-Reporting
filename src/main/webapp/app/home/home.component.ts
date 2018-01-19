@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     anySelected = false;
 
+    previousSelectedDate : Date;
     selectedYear  : number;
     selectedMonth : number;
     selectedDays  =[];
@@ -57,18 +58,50 @@ export class HomeComponent implements OnInit {
 
     daySelected(event: any) {
 
+        //We check if we changed the month or the year
+
+        if(this.previousSelectedDate){
+
+            const temp  = new Date(event.date);
+
+            if(temp.getMonth() != this.previousSelectedDate.getMonth() ||
+                temp.getFullYear() != this.previousSelectedDate.getFullYear()){
+
+                this.selectedDays = [];
+            }
+
+        }
+        this.previousSelectedDate = new Date(event.date);
+
+        this.selectedYear = this.previousSelectedDate.getFullYear();
+        this.selectedMonth =  this.previousSelectedDate.getMonth() + 1; //Months start from 0 in Date library
+
         if(!this.selectedDays[event.date]){
 
-            this.selectedDays[event.date] =new Date(event.date).getDate();
+            this.selectedDays[event.date] = {
+                date : new Date(event.date).getDate(),
+                half : false
+            };
 
         }else{
-            delete this.selectedDays[event.date];
+
+            if(this.selectedDays[event.date].half){
+
+                delete this.selectedDays[event.date];
+
+            }else{
+                this.selectedDays[event.date].half =true;
+            }
         }
     }
+
     generateReport(){
 
+        const report : Report = new Report(this.selectedMonth, this.selectedYear);
+
         for(let key in this.selectedDays){
-            console.log(this.selectedDays[key]);
+            report.workedDays.push(this.selectedDays[key].date);
         }
+        console.log(report);
     }
 }
